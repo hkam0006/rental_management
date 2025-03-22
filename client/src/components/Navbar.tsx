@@ -23,12 +23,12 @@ const Navbar = () => {
           Discover your perfect rental apartment with our easy-to-use platform.
         </p> 
         <div className='flex items-center gap-5'>
-          <Link href="/sign-in">
+          <Link href="/signin">
             <Button variant="outline" className='text-white border-white bg-transparent hover:bg-white hover:text-primary-700'>
               Sign In
             </Button>
           </Link>
-          <Link href="/sign-up">
+          <Link href="/signup">
             <Button variant="secondary" className='bg-secondary-600 hover:bg-white hover:text-primary-700 rounded-lg'>
               Sign Up
             </Button>
