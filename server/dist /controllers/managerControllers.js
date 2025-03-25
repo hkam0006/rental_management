@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createManager = exports.getManager = void 0;
+exports.updateManager = exports.createManager = exports.getManager = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const getManager = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -50,3 +50,22 @@ const createManager = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.createManager = createManager;
+const updateManager = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cognitoId } = req.params;
+        const { email, name, phoneNumber } = req.body;
+        const updatedManager = yield prisma.manager.update({
+            where: { cognitoId },
+            data: {
+                email,
+                name,
+                phoneNumber
+            }
+        });
+        res.json(updatedManager);
+    }
+    catch (err) {
+        res.status(500).json({ message: ` Error updating manager: ${err.message}` });
+    }
+});
+exports.updateManager = updateManager;
