@@ -17,8 +17,7 @@ const Navbar = () => {
   const router = useRouter()
   const pathname = usePathname()
 
-  const isDashboardPage = pathname.startsWith("/manager") || pathname.startsWith("/tenants")
-
+  const isDashboardPage = pathname.startsWith("/managers") || pathname.startsWith("/tenants")
   const handleSignOut = async () => {
     // sign out the user
     await signOut()

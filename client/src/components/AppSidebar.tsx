@@ -16,10 +16,10 @@ const AppSidebar = ({userType} : AppSidebarProps) => {
     {icon: FileText, label: 'Applications', href: '/manager/applications'},
     {icon: Settings, label: 'Settings', href: '/manager/settings'},
   ] : [
-    {icon: Heart, label: 'Favorites', href: '/tenants/properties'},
+    {icon: Home, label: 'Residences', href: '/tenants/residences'},
+    {icon: Heart, label: 'Favorites', href: '/tenants/favorites'},
     {icon: FileText, label: 'Applications', href: '/tenants/applications'},
     {icon: Settings, label: 'Settings', href: '/tenants/settings'},
-    {icon: Home, label: 'Residences', href: '/tenants/residences'},
   ]
 
   return (
