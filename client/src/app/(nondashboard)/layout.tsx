@@ -29,7 +29,6 @@ const Layout = ({children} : {children: React.ReactNode}) => {
   }, [authUser, router, pathname])
   
   if (authLoading || isLoading) return <>...Loading</>
-  if (!authUser) router.push("/signin")
 
   return (
     <div className='h-full w-full'>
