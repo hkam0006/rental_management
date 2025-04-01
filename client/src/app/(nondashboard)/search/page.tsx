@@ -35,7 +35,7 @@ const SearchPage = () => {
 
     const cleanedFilters = cleanParams(initialFilters)
     dispatch(setFilters(cleanedFilters))
-  }, [])
+  }, [searchParams])
 
   return (
     <div 
@@ -45,7 +45,7 @@ const SearchPage = () => {
       }}
     >
       <FiltersBar />
-      <div className='flex justify-between flex-1 overflow-hidden gap-3 mb-5'>
+      <div className='flex justify-between overflow-hidden gap-3 h-[100%]'>
         <div 
           className={`h-full overflow-auto transition-all duration-300 ease-in-out ${
             isFiltersFullOpen 

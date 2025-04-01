@@ -68,6 +68,12 @@ export const api = createApi({
       invalidatesTags: (result) => [{type: "Managers", id: result?.id}]
     }),
 
+    // tenant related endpoints
+    getTenant: build.query<Tenant, string>({
+      query: (cognitoId) => `tenants/${cognitoId}`,
+      providesTags: (result) => [{type: "Tenants", id: result?.id}]
+    }),
+
     // property related endpoints
       getProperties: build.query<Property[], Partial<FiltersState> & {favoriteIds? : number[]}>({
         query: (filters) => {
@@ -128,5 +134,6 @@ export const {
   useUpdateManagerSettingsMutation,
   useGetPropertiesQuery,
   useAddFavoritePropertyMutation,
-  useRemoveFavoritePropertyMutation
+  useRemoveFavoritePropertyMutation,
+  useGetTenantQuery
 } = api;
