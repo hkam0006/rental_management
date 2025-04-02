@@ -12,9 +12,9 @@ const AppSidebar = ({userType} : AppSidebarProps) => {
   const {toggleSidebar, open} = useSidebar()
 
   const navLinks = userType === 'manager' ? [
-    {icon: Building, label: 'Properties', href: '/manager/properties'},
-    {icon: FileText, label: 'Applications', href: '/manager/applications'},
-    {icon: Settings, label: 'Settings', href: '/manager/settings'},
+    {icon: Building, label: 'Properties', href: '/managers/properties'},
+    {icon: FileText, label: 'Applications', href: '/managers/applications'},
+    {icon: Settings, label: 'Settings', href: '/managers/settings'},
   ] : [
     {icon: Home, label: 'Residences', href: '/tenants/residences'},
     {icon: Heart, label: 'Favorites', href: '/tenants/favorites'},

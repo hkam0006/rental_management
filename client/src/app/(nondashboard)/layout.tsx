@@ -1,4 +1,5 @@
 'use client'
+import LoadingComponent from '@/components/LoadingComponent';
 import Navbar from '@/components/Navbar'
 import { NAVBAR_HEIGHT } from '@/lib/constants'
 import { useGetAuthUserQuery } from '@/state/api';
@@ -28,7 +29,7 @@ const Layout = ({children} : {children: React.ReactNode}) => {
     setIsLoading(false)
   }, [authUser, router, pathname])
   
-  if (authLoading || isLoading) return <>...Loading</>
+  if (authLoading || isLoading) return <LoadingComponent />
 
   return (
     <div className='h-full w-full'>

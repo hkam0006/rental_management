@@ -1,16 +1,19 @@
 'use client'
 import { useGetAuthUserQuery } from '@/state/api'
 import { useParams } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import ImagePreviews from './ImagePreviews'
 import PropertyOverview from './PropertyOverview'
 import PropertyDetails from './PropertyDetails'
 import PropertyLocation from './PropertyLocation'
+import ContactWidget from './ContactWidget'
+import ApplicationModal from './ApplicationModal'
 
 const SingleListing = () => {
   const {id} = useParams()
   const propertyId = Number(id)
   const {data: authUser} = useGetAuthUserQuery()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <div>
@@ -23,7 +26,19 @@ const SingleListing = () => {
           <PropertyDetails propertyId={propertyId} />
           <PropertyLocation propertyId={propertyId}/>
         </div>
+
+        <div className='order-1 md:order-2'>
+          <ContactWidget onOpenModal={() => setIsModalOpen(true)}/>
+        </div>
       </div>
+
+      {/* {authUser && (
+        <ApplicationModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          propertyId={propertyId}
+        />
+      )} */}
     </div>
   )
 }

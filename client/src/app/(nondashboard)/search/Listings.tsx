@@ -1,5 +1,6 @@
 import Card from '@/components/Card';
 import CardCompact from '@/components/CardCompact';
+import LoadingComponent from '@/components/LoadingComponent';
 import { setViewMode } from '@/state';
 import { useAddFavoritePropertyMutation, useGetAuthUserQuery, useGetPropertiesQuery, useGetTenantQuery, useRemoveFavoritePropertyMutation } from '@/state/api'
 import { useAppSelector } from '@/state/redux';
@@ -39,7 +40,7 @@ const Listings = () => {
     }
   }
 
-  if (isLoading) return <>...Loading</>
+  if (isLoading) return <LoadingComponent />
   if (isError || !properties) return <div>Failed to fetch properties</div>
 
   return (

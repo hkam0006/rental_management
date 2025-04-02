@@ -46,7 +46,7 @@ const Navbar = () => {
             <Button 
               variant='secondary' 
               className='md:ml-4 bg-primary-50 text-primary-700 hover:bg-secondary-500 hover:text-primary-50' 
-              onClick={() => router.push(authUser.userRole?.toLowerCase() === 'manager' ? '/manager/newproperty' : '/search')}
+              onClick={() => router.push(authUser.userRole?.toLowerCase() === 'manager' ? '/managers/newproperty' : '/search')}
             >
               {authUser.userRole?.toLowerCase() === 'manager' ? (
                 <>
