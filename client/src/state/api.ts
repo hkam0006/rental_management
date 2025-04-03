@@ -159,11 +159,11 @@ export const api = createApi({
         query: (newProperty) => ({
           url: `properties`,
           method: "POST",
-          body: newProperty
+          body: newProperty,
         }),
         invalidatesTags: (result) => [
-          {type: "Properties", id: "LIST"},
-          {type: "Managers", id: result?.manager?.id},
+          { type: "Properties", id: "LIST" },
+          { type: "Managers", id: result?.manager?.id },
         ],
       }),
 
