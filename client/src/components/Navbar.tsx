@@ -95,7 +95,7 @@ const Navbar = () => {
                   <DropdownMenuItem 
                     className='cursor-pointer hover:!bg-primary-700 hover:!text-primary-100 font-bold' 
                     onClick={() => router.push(
-                      authUser.userRole?.toLowerCase() === 'manager' ? "/manager/properties" : "/tenants/favorites",
+                      authUser.userRole?.toLowerCase() === 'manager' ? "/managers/properties" : "/tenants/favorites",
                       {scroll: false}
                     )}
                   >
