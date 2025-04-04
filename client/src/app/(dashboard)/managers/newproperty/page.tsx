@@ -58,6 +58,7 @@ const CreatePropertyPage = () => {
     })
     formData.append("managerCognitoId", authUser.cognitoInfo.userId)
     await createProperty(formData)
+    form.reset()
   }
 
   return (

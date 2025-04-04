@@ -5,56 +5,55 @@ const prisma = new PrismaClient();
 
 export const listApplications = async (req: Request, res: Response): Promise<void> => {
   try {
-    const {userId, userType} = req.query
-    
-    let whereClause = {}
+    const { userId, userType } = req.query;
+
+    let whereClause = {};
 
     if (userId && userType) {
-      if (userType === 'tenant'){
-        whereClause = 
-        {tenantCognito: String(userId)}
-      } else if (userType === 'manager'){
+      if (userType === "tenant") {
+        whereClause = { tenantCognitoId: String(userId) };
+      } else if (userType === "manager") {
         whereClause = {
           property: {
-            managerCognitoId: String(userId)
-          }
-        }
+            managerCognitoId: String(userId),
+          },
+        };
       }
     }
 
-    const applications  = await prisma.application.findMany({
+    const applications = await prisma.application.findMany({
       where: whereClause,
       include: {
         property: {
           include: {
             location: true,
             manager: true,
-          }
+          },
         },
-        tenant: true
-      }
-    })
+        tenant: true,
+      },
+    });
 
     function calculateNextPaymentDate(startDate: Date): Date {
-      const today = new Date()
-      const nextPaymentDate = new Date(startDate)
+      const today = new Date();
+      const nextPaymentDate = new Date(startDate);
       while (nextPaymentDate <= today) {
-        nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1)
+        nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
       }
-      return nextPaymentDate
+      return nextPaymentDate;
     }
 
-    const formattedApplications  = await Promise.all([
+    const formattedApplications = await Promise.all(
       applications.map(async (app) => {
         const lease = await prisma.lease.findFirst({
           where: {
             tenant: {
-              cognitoId: app.tenantCognitoId
+              cognitoId: app.tenantCognitoId,
             },
-            propertyId: app.propertyId
+            propertyId: app.propertyId,
           },
-          orderBy: {startDate: "desc"}
-        })
+          orderBy: { startDate: "desc" },
+        });
 
         return {
           ...app,
@@ -63,14 +62,21 @@ export const listApplications = async (req: Request, res: Response): Promise<voi
             address: app.property.location.address,
           },
           manager: app.property.manager,
-          lease: lease ? {...lease, nextPaymentDate: calculateNextPaymentDate(lease.startDate)} : null
-        }
+          lease: lease
+            ? {
+                ...lease,
+                nextPaymentDate: calculateNextPaymentDate(lease.startDate),
+              }
+            : null,
+        };
       })
-    ])
+    );
 
-    res.json(formattedApplications)
-  } catch (err: any) {
-    res.status(500).json({ message: `Error retrieving applications: ${err.message}` });
+    res.json(formattedApplications);
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: `Error retrieving applications: ${error.message}` });
   }
 };
 

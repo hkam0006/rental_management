@@ -45,7 +45,7 @@ const Residences = () => {
         ))}
       </div>
       {(!currentResidences || currentResidences.length === 0) && (
-        <p>You don't have any current residences</p>
+        <p>You don&apos;t have any current residences</p>
       )}
     </div>
   )

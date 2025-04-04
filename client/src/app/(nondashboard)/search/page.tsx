@@ -9,10 +9,11 @@ import { cleanParams } from '@/lib/utils'
 import { setFilters } from '@/state'
 import Map from './Map'
 import Listings from './Listings'
+import { useDispatch } from 'react-redux'
 
 const SearchPage = () => {
   const searchParams = useSearchParams()
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const isFiltersFullOpen = useAppSelector(
     (state) => state.global.isFiltersFullOpen
   )
@@ -35,7 +36,7 @@ const SearchPage = () => {
 
     const cleanedFilters = cleanParams(initialFilters)
     dispatch(setFilters(cleanedFilters))
-  }, [searchParams])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div 
